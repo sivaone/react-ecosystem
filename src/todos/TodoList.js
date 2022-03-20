@@ -4,25 +4,35 @@ import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import {loadTodos, removeTodoRequest} from "./thunks";
 import { markAsCompleted} from "./actions";
+import {
+    getTodos,
+    getTodosLoading,
+    getIncompleteTodos,
+    getCompletedTodos
+} from "./selectors";
 import "./TodoList.css"
 
-const TodoList = ({todos = [], onRemovePressed, onMarkAsCompleted, isLoading, startLoadingTodos}) => {
+const TodoList = ({completedTodos, incompleteTodos, onRemovePressed, onMarkAsCompleted, isLoading, startLoadingTodos}) => {
     useEffect(() => {
         startLoadingTodos();
     }, []);
-
-    console.log('todos in todo list');
-    console.log(todos);
 
     const loadingMessage = <div>Loading todos...</div>;
 
     const content = (
         <div className="list-wrapper">
             <NewTodoForm/>
-            {todos.map(todo => <TodoListItem
+            <h3>Incomplete:</h3>
+            {incompleteTodos.map(todo => <TodoListItem
                     todo={todo}
                     onRemovePressed={onRemovePressed}
                     onMarkAsCompleted={onMarkAsCompleted}/>)
+            }
+            <h3>Completed:</h3>
+            {completedTodos.map(todo => <TodoListItem
+                todo={todo}
+                onRemovePressed={onRemovePressed}
+                onMarkAsCompleted={onMarkAsCompleted}/>)
             }
         </div>
     );
@@ -30,8 +40,9 @@ const TodoList = ({todos = [], onRemovePressed, onMarkAsCompleted, isLoading, st
 };
 
 const mapStateToProps = state => ({
-    isLoading: state.isLoading,
-    todos: state.todos,
+    isLoading: getTodosLoading(state),
+    completedTodos: getCompletedTodos(state),
+    incompleteTodos: getIncompleteTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({

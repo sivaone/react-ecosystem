@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
 import {addTodoRequest} from "./thunks";
+import {getTodos} from "./selectors";
 import "./NewTodoForm.css";
 
 // connect is higher order function can called as connect()()
@@ -34,7 +35,7 @@ const NewTodoForm = ({ todos, onCreatePressed }) => {
 
 // take global state and pass relevant state
 const mapStateToProps = state => ({
-    todos: state.todos,
+    todos: getTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({
