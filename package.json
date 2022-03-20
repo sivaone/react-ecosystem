@@ -8,7 +8,9 @@
     "build": "npx webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -27,6 +29,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "redux": "^4.1.2"
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0"
   }
 }
