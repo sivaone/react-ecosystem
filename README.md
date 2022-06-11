@@ -1,2 +1,5 @@
 # react-ecosystem
-React project with some eco system libraries
+React project with below eco system libraries
+* Redux
+* Redux Thunk
+* Styled
